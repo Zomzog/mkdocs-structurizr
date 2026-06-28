@@ -1,4 +1,4 @@
-workspace "My Little Architecture" "Architecture documentation for the frontend and ponyManager systems." {
+workspace "My Little Architecture" "Architecture documentation for the frontend, ponyManager and myLittleFactory systems." {
 
     model {
 
@@ -18,7 +18,23 @@ workspace "My Little Architecture" "Architecture documentation for the frontend 
             myLittlePonyManager -> myLittlePonyDb "Reads from and writes to" "JDBC"
         }
 
-        myLittleBff -> myLittlePonyManager "Delegates pony operations to" "HTTP"
+        myLittleFactory = softwareSystem "MyLittleFactory" "Handles cupcake production and spam notifications." {
+
+            cupcakeFactory        = container "CupcakeFactory"        "Manages cupcake production workflows."
+            cupcakeFactoryDatabase = container "CupcakeFactoryDatabase" "Stores cupcake production data." "PostgreSQL"
+            cupcakeTopic          = container "CupcakeTopic"          "Event stream for cupcake events." "Kafka"
+            myLittleSpam          = container "MyLittleSpam"          "Sends notifications triggered by cupcake events."
+            myLittleSpamDatabase  = container "MyLittleSpamDatabase"  "Stores spam/notification records." "MongoDB"
+
+            cupcakeFactory        -> cupcakeFactoryDatabase "Reads from and writes to" "JDBC"
+            cupcakeFactory        -> cupcakeTopic           "Publishes events to" "Kafka"
+            cupcakeTopic          -> myLittleSpam           "Delivers events to" "Kafka"
+            myLittleSpam          -> myLittleSpamDatabase   "Reads from and writes to"
+        }
+
+        myLittleBff     -> myLittlePonyManager "Delegates pony operations to" "HTTP"
+        cupcakeFactory  -> myLittlePonyManager "Fetches pony data from" "HTTP"
+        myLittleBff     -> cupcakeFactory      "Makes API calls to" "HTTP"
 
     }
 
@@ -45,6 +61,16 @@ workspace "My Little Architecture" "Architecture documentation for the frontend 
         }
 
         container ponyManager "Containers_ponyManager" "Container-level view of the ponyManager system." {
+            include *
+            autoLayout
+        }
+
+        systemContext myLittleFactory "SystemContext_myLittleFactory" "Context view for the myLittleFactory system." {
+            include *
+            autoLayout
+        }
+
+        container myLittleFactory "Containers_myLittleFactory" "Container-level view of the myLittleFactory system." {
             include *
             autoLayout
         }
