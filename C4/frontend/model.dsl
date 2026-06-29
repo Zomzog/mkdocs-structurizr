@@ -3,5 +3,4 @@ frontend = softwareSystem "frontend" "Serves the web UI and acts as a back-end f
     !include frontend/myLittleBff/model.dsl
 }
 
-!include frontend/myLittleWebApp/relationship.dsl
 !include frontend/myLittleBff/relationship.dsl

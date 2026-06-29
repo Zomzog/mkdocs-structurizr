@@ -4,4 +4,3 @@ myLittleFactory = softwareSystem "MyLittleFactory" "Handles cupcake production a
 }
 
 !include myLittleFactory/cupcakeFactory/relationship.dsl
-!include myLittleFactory/myLittleSpam/relationship.dsl

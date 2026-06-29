@@ -32,11 +32,12 @@ Define this service's container(s), any storage it directly owns, and intra-serv
 Component-level (C4 Level 3) diagrams scoped to this service. Create only when component diagrams exist.
 
 ### `<service>/relationship.dsl`
-**Create only when a relationship cannot be expressed inside `model.dsl`** (i.e., it crosses service or system boundaries).
+**Create only when a relationship cannot be expressed inside `model.dsl`** (i.e., it crosses **system** boundaries).
 Always written from the consuming service's perspective:
-- `externalTopic --> thisService "..." "Kafka"` — this service consumes a Kafka topic
-- `thisService --> externalService "..." "HTTP"` — this service calls an external HTTP endpoint
+- `externalTopic --> thisService "..." "Kafka"` — this service consumes a Kafka topic owned by another system
+- `thisService --> externalService "..." "HTTP"` — this service calls a service in another system
 
+Intra-system relationships (both containers in the same `softwareSystem`) always go in `model.dsl`.
 Never add a relationship here if it can live in `model.dsl`. Do not create the file if it would be empty.
 
 ## Updating These Rules
