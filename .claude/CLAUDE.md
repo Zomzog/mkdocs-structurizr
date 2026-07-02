@@ -53,12 +53,14 @@ C4/cuj/
 ```
 
 ### `C4/cuj/tags.dsl`
-Each CUJ gets a `UC_<name>` tag (e.g. `UC_cupcake_order`). Apply it with `.tags "UC_..."` to every
-container **and** every relationship that participates in the journey. Relationships need an
-identifier at their existing declaration site (in whichever `model.dsl`/`relationship.dsl` already owns
-them) so `tags.dsl` can reference them — this is a purely additive `name = ` prefix; the relationship
-itself stays owned by its existing file. `!include`d from `workspace.dsl`'s `model` block **after** all
-system model includes, so every identifier it tags already exists.
+Each CUJ gets a `UC_<name>` tag (e.g. `UC_cupcake_order`). Apply it to every container with
+`.tags "UC_..."`. For relationships, no identifiers are needed: redeclare the relationship with the
+exact same source, destination, description and technology as its existing declaration (in whichever
+`model.dsl`/`relationship.dsl` already owns it) and add a `{ tags "UC_..." }` block — Structurizr merges
+this into the existing relationship rather than creating a duplicate, as long as the description and
+technology match exactly. The relationship itself stays owned by its existing file; `tags.dsl` only adds
+tags. `!include`d from `workspace.dsl`'s `model` block **after** all system model includes, so every
+container/relationship it tags already exists.
 
 ### `C4/cuj/view.dsl`
 One `filtered "SystemLandscape" include "UC_..." "<ViewKey>" "<description>"` per CUJ. `!include`d from
