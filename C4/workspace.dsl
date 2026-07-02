@@ -4,6 +4,7 @@ workspace "My Little Architecture" "Architecture documentation for the frontend,
         !include frontend/model.dsl
         !include ponyManager/model.dsl
         !include myLittleFactory/model.dsl
+        !include cuj/tags.dsl
     }
 
     views {
@@ -16,6 +17,7 @@ workspace "My Little Architecture" "Architecture documentation for the frontend,
         !include frontend/view.dsl
         !include ponyManager/view.dsl
         !include myLittleFactory/view.dsl
+        !include cuj/view.dsl
 
         theme default
     }

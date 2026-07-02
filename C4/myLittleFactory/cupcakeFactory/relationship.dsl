@@ -1,1 +1,1 @@
-cupcakeFactory -> myLittlePonyManager "Fetches pony data from" "HTTP"
+cupcakeFactoryToPonyManager = cupcakeFactory -> myLittlePonyManager "Fetches pony data from" "HTTP"

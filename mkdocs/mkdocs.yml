@@ -1,0 +1,30 @@
+site_name: My Little Architecture
+site_description: Architecture documentation for the frontend, ponyManager and myLittleFactory systems.
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.snippets:
+      base_path: ["docs/diagrams"]
+      check_paths: true
+
+nav:
+  - Home: index.md
+  - frontend:
+      - MyLittleWebApp: frontend/myLittleWebApp.md
+      - MyLittleBff: frontend/myLittleBff.md
+  - ponyManager:
+      - MyLittlePonyManager: ponyManager/myLittlePonyManager.md
+  - myLittleFactory:
+      - CupcakeFactory: myLittleFactory/cupcakeFactory.md
+      - MyLittleSpam: myLittleFactory/myLittleSpam.md

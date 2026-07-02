@@ -1,0 +1,2 @@
+mkdocs/docs/diagrams/*
+!mkdocs/docs/diagrams/.gitkeep
