@@ -22,8 +22,8 @@ The architecture is made up of three software systems:
 ## Critical User Journeys
 
 Every page below documents the services along with the Critical User Journeys (CUJs) they take part in.
-Each CUJ diagram is generated directly from the [Structurizr](https://structurizr.com) C4 model under
-`C4/`, filtered down to the elements tagged for that journey, so it can never drift from the architecture:
+Each CUJ is illustrated as a sequence diagram generated directly from the
+[Structurizr](https://structurizr.com) C4 model under `C4/`, so it can never drift from the architecture:
 
 - **`UC_cupcake_order`** — a pony must be able to order a cupcake.
 - **`UC_cupcake_notification`** — finished cupcakes must send a notification.
