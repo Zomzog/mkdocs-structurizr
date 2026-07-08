@@ -1,0 +1,27 @@
+services:
+  diagram-export:
+    image: structurizr/cli:latest
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "/usr/local/structurizr-cli/structurizr.sh export
+      -workspace /usr/local/structurizr/workspace.dsl
+      -format mermaid
+      -output /usr/local/structurizr/export &&
+      cd /usr/local/structurizr/export &&
+      for f in *CUJ_PonyOrdersCupcake.mmd; do [ -e \"$$f\" ] && mv -f -- \"$$f\" CUJ_PonyOrdersCupcake.mmd; done &&
+      for f in *CUJ_CupcakeFinishedNotification.mmd; do [ -e \"$$f\" ] && mv -f -- \"$$f\" CUJ_CupcakeFinishedNotification.mmd; done"
+    volumes:
+      - ./C4:/usr/local/structurizr
+      - ./mkdocs/docs/diagrams:/usr/local/structurizr/export
+
+  mkdocs:
+    image: squidfunk/mkdocs-material:latest
+    working_dir: /docs
+    volumes:
+      - ./mkdocs:/docs
+    ports:
+      - "8000:8000"
+    depends_on:
+      diagram-export:
+        condition: service_completed_successfully
+    command: serve -a 0.0.0.0:8000
