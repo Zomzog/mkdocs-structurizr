@@ -1,9 +1,9 @@
 services:
   diagram-export:
-    image: structurizr/cli:2025.11.09
+    image: structurizr/structurizr:2026.06.28-noble
     entrypoint: ["/bin/sh", "-c"]
     command: >
-      "/usr/local/structurizr-cli/structurizr.sh export
+      "/usr/local/structurizr.sh export
       -workspace /usr/local/structurizr/workspace.dsl
       -format mermaid
       -output /usr/local/structurizr/export &&
