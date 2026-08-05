@@ -22,18 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Export C4 diagrams with Structurizr CLI
-        run: |
-          docker run --rm \
-            -v "${{ github.workspace }}/C4:/usr/local/structurizr" \
-            -v "${{ github.workspace }}/mkdocs/docs/diagrams:/usr/local/structurizr/export" \
-            structurizr/cli:latest export \
-            -workspace /usr/local/structurizr/workspace.dsl \
-            -format mermaid \
-            -output /usr/local/structurizr/export
-
-          cd mkdocs/docs/diagrams
-          for f in *CUJ_PonyOrdersCupcake.mmd; do [ -e "$f" ] && mv -f -- "$f" CUJ_PonyOrdersCupcake.mmd; done
-          for f in *CUJ_CupcakeFinishedNotification.mmd; do [ -e "$f" ] && mv -f -- "$f" CUJ_CupcakeFinishedNotification.mmd; done
+        run: docker compose run --rm diagram-export
 
       - name: Set up Python
         uses: actions/setup-python@v5
