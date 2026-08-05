@@ -1,9 +1,9 @@
 workspace "My Little Architecture" "Architecture documentation for the frontend, ponyManager and myLittleFactory systems." {
 
     model {
-        !include frontend/model.dsl
         !include ponyManager/model.dsl
         !include myLittleFactory/model.dsl
+        !include frontend/model.dsl
         !include cuj/tags.dsl
     }
 
