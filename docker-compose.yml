@@ -1,6 +1,6 @@
 services:
   diagram-export:
-    image: structurizr/cli:latest
+    image: structurizr/cli:2025.11.09
     entrypoint: ["/bin/sh", "-c"]
     command: >
       "/usr/local/structurizr-cli/structurizr.sh export
