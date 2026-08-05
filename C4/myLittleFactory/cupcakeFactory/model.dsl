@@ -4,4 +4,3 @@ cupcakeTopic           = container "CupcakeTopic"           "Event stream for cu
 
 cupcakeFactory -> cupcakeFactoryDatabase "Reads from and writes to" "JDBC"
 cupcakeFactory -> cupcakeTopic           "Publishes events to" "Kafka"
-cupcakeTopic   -> myLittleSpam           "Delivers events to" "Kafka"
