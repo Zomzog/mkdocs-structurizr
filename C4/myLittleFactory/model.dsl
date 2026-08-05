@@ -2,7 +2,7 @@ myLittleFactory = softwareSystem "MyLittleFactory" "Handles cupcake production a
     !include cupcakeFactory/model.dsl
     !include myLittleSpam/model.dsl
 
-    relCupcakeTopicToSpam = cupcakeTopic -> myLittleSpam "Delivers events to" "Kafka"
+    cupcakeTopic -> myLittleSpam "Delivers events to" "Kafka"
 }
 
 !include cupcakeFactory/relationship.dsl

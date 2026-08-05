@@ -1,1 +1,1 @@
-relCupcakeFactoryToPonyManager = cupcakeFactory -> myLittlePonyManager "Fetches pony data from" "HTTP"
+cupcakeFactory -> myLittlePonyManager "Fetches pony data from" "HTTP"

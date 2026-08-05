@@ -1,24 +1,24 @@
 // UC_cupcake_order: a pony must be able to order a cupcake
-!relationship relWebAppToBff {
+!relationship "Relationship://Container://frontend.MyLittleWebApp -> Container://frontend.MyLittleBff (Makes API calls to)" {
     tags "UC_cupcake_order"
 }
-!relationship relBffToCupcakeFactory {
+!relationship "Relationship://Container://frontend.MyLittleBff -> Container://MyLittleFactory.CupcakeFactory (Makes API calls to)" {
     tags "UC_cupcake_order"
 }
-!relationship relCupcakeFactoryToPonyManager {
+!relationship "Relationship://Container://MyLittleFactory.CupcakeFactory -> Container://ponyManager.MyLittlePonyManager (Fetches pony data from)" {
     tags "UC_cupcake_order"
 }
-!relationship relCupcakeFactoryToDb {
+!relationship "Relationship://Container://MyLittleFactory.CupcakeFactory -> Container://MyLittleFactory.CupcakeFactoryDatabase (Reads from and writes to)" {
     tags "UC_cupcake_order"
 }
 
 // UC_cupcake_notification: finished cupcakes must send a notification
-!relationship relCupcakeFactoryToTopic {
+!relationship "Relationship://Container://MyLittleFactory.CupcakeFactory -> Container://MyLittleFactory.CupcakeTopic (Publishes events to)" {
     tags "UC_cupcake_notification"
 }
-!relationship relCupcakeTopicToSpam {
+!relationship "Relationship://Container://MyLittleFactory.CupcakeTopic -> Container://MyLittleFactory.MyLittleSpam (Delivers events to)" {
     tags "UC_cupcake_notification"
 }
-!relationship relSpamToSpamDb {
+!relationship "Relationship://Container://MyLittleFactory.MyLittleSpam -> Container://MyLittleFactory.MyLittleSpamDatabase (Reads from and writes to)" {
     tags "UC_cupcake_notification"
 }
