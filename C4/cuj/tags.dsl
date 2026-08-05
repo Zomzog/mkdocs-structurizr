@@ -1,10 +1,10 @@
 // UC_cupcake_order: a pony must be able to order a cupcake
-myLittleWebApp -> myLittleBff            "Makes API calls to"       "HTTP" { tags "UC_cupcake_order" }
-myLittleBff    -> cupcakeFactory         "Makes API calls to"       "HTTP" { tags "UC_cupcake_order" }
-cupcakeFactory -> myLittlePonyManager    "Fetches pony data from"   "HTTP" { tags "UC_cupcake_order" }
-cupcakeFactory -> cupcakeFactoryDatabase "Reads from and writes to" "JDBC" { tags "UC_cupcake_order" }
+myLittleWebApp -> myLittleBff            "Order a cupcake in the frontend"       "HTTP" "UC_cupcake_order"
+myLittleBff    -> cupcakeFactory         "Register the order in the factory"       "HTTP" "UC_cupcake_order"
+cupcakeFactory -> myLittlePonyManager    "Add Pony's details to the order"   "HTTP" "UC_cupcake_order"
+cupcakeFactory -> cupcakeFactoryDatabase "Save the order in database" "JDBC" "UC_cupcake_order"
 
 // UC_cupcake_notification: finished cupcakes must send a notification
-cupcakeFactory -> cupcakeTopic         "Publishes events to"      "Kafka" { tags "UC_cupcake_notification" }
-cupcakeTopic   -> myLittleSpam         "Delivers events to"       "Kafka" { tags "UC_cupcake_notification" }
-myLittleSpam   -> myLittleSpamDatabase "Reads from and writes to"         { tags "UC_cupcake_notification" }
+cupcakeFactory -> cupcakeTopic         "Notify an order is ready"      "Kafka" "UC_cupcake_notification"
+cupcakeTopic   -> myLittleSpam         "Async notify the spam machine"       "Kafka" "UC_cupcake_notification"
+myLittleSpam   -> myLittleSpamDatabase "Add the email to be sent 21 times in the database"         "UC_cupcake_notification"

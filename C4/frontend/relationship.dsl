@@ -1,0 +1,1 @@
+!include myLittleBff/relationship.dsl
