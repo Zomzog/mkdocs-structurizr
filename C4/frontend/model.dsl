@@ -2,7 +2,7 @@ frontend = softwareSystem "frontend" "Serves the web UI and acts as a back-end f
     !include myLittleWebApp/model.dsl
     !include myLittleBff/model.dsl
 
-    myLittleWebApp -> myLittleBff "Makes API calls to" "HTTP"
+    relWebAppToBff = myLittleWebApp -> myLittleBff "Makes API calls to" "HTTP"
 }
 
 !include myLittleBff/relationship.dsl

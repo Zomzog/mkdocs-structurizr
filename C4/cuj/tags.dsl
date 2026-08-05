@@ -1,24 +1,24 @@
 // UC_cupcake_order: a pony must be able to order a cupcake
-myLittleWebApp -> myLittleBff            "Makes API calls to"       "HTTP" {
+!relationship relWebAppToBff {
     tags "UC_cupcake_order"
 }
-myLittleBff    -> cupcakeFactory         "Makes API calls to"       "HTTP" {
+!relationship relBffToCupcakeFactory {
     tags "UC_cupcake_order"
 }
-cupcakeFactory -> myLittlePonyManager    "Fetches pony data from"   "HTTP" {
+!relationship relCupcakeFactoryToPonyManager {
     tags "UC_cupcake_order"
 }
-cupcakeFactory -> cupcakeFactoryDatabase "Reads from and writes to" "JDBC" {
+!relationship relCupcakeFactoryToDb {
     tags "UC_cupcake_order"
 }
 
 // UC_cupcake_notification: finished cupcakes must send a notification
-cupcakeFactory -> cupcakeTopic         "Publishes events to"      "Kafka" {
+!relationship relCupcakeFactoryToTopic {
     tags "UC_cupcake_notification"
 }
-cupcakeTopic   -> myLittleSpam         "Delivers events to"       "Kafka" {
+!relationship relCupcakeTopicToSpam {
     tags "UC_cupcake_notification"
 }
-myLittleSpam   -> myLittleSpamDatabase "Reads from and writes to" {
+!relationship relSpamToSpamDb {
     tags "UC_cupcake_notification"
 }
