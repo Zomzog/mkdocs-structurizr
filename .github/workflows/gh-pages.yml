@@ -1,0 +1,64 @@
+name: Deploy MkDocs site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Export C4 diagrams with Structurizr CLI
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/C4:/usr/local/structurizr" \
+            -v "${{ github.workspace }}/mkdocs/docs/diagrams:/usr/local/structurizr/export" \
+            structurizr/cli:latest export \
+            -workspace /usr/local/structurizr/workspace.dsl \
+            -format mermaid \
+            -output /usr/local/structurizr/export
+
+          cd mkdocs/docs/diagrams
+          for f in *CUJ_PonyOrdersCupcake.mmd; do [ -e "$f" ] && mv -f -- "$f" CUJ_PonyOrdersCupcake.mmd; done
+          for f in *CUJ_CupcakeFinishedNotification.mmd; do [ -e "$f" ] && mv -f -- "$f" CUJ_CupcakeFinishedNotification.mmd; done
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Build site
+        working-directory: mkdocs
+        run: mkdocs build --strict
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: mkdocs/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
