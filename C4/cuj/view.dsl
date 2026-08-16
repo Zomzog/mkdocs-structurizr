@@ -1,4 +1,4 @@
-dynamicView * "CUJ_PonyOrdersCupcake" "A pony orders a cupcake." {
+dynamic frontend "CUJ_PonyOrdersCupcake" "A pony orders a cupcake." {
     myLittleWebApp -> myLittleBff "Places a cupcake order"
     myLittleBff -> cupcakeFactory "Submits the order"
     cupcakeFactory -> myLittlePonyManager "Validates the pony"
@@ -10,7 +10,7 @@ dynamicView * "CUJ_PonyOrdersCupcake" "A pony orders a cupcake." {
     }
 }
 
-dynamicView * "CUJ_CupcakeFinishedNotification" "A finished cupcake triggers a notification." {
+dynamic myLittleFactory "CUJ_CupcakeFinishedNotification" "A finished cupcake triggers a notification." {
     cupcakeFactory -> cupcakeTopic "Publishes a cupcake-finished event"
     cupcakeTopic -> myLittleSpam "Delivers the event"
     myLittleSpam -> myLittleSpamDatabase "Records the notification"
