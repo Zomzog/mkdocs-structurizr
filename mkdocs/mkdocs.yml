@@ -4,6 +4,15 @@ docs_dir: docs
 
 theme:
   name: material
+  palette:
+    - scheme: light
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: dark
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   features:
     - navigation.sections
     - content.code.copy
